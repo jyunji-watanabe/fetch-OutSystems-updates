@@ -1,4 +1,4 @@
-using System.Text.RegularExpressions;
+using HtmlAgilityPack;
 using Microsoft.Playwright;
 
 namespace FetchOutSystemsUpdates.Cli;
@@ -8,7 +8,7 @@ public class Program
     public static Task<int> Main(string[] args) => TitleCommand.RunAsync(args);
 }
 
-public static partial class TitleCommand
+public static class TitleCommand
 {
     private const string DefaultUrl = "https://example.com";
 
@@ -49,15 +49,17 @@ public static partial class TitleCommand
         }
 
         var html = await response.TextAsync();
-        var match = TitleRegex().Match(html);
-        if (!match.Success)
+        var document = new HtmlDocument();
+        document.LoadHtml(html);
+
+        var titleNode = document.DocumentNode.SelectSingleNode("//title");
+        var title = titleNode?.InnerText?.Trim();
+
+        if (string.IsNullOrWhiteSpace(title))
         {
             throw new InvalidOperationException("No <title> tag found in the response.");
         }
 
-        return match.Groups[1].Value.Trim();
+        return title;
     }
-
-    [GeneratedRegex("<title[^>]*>(.*?)</title>", RegexOptions.IgnoreCase | RegexOptions.Singleline)]
-    private static partial Regex TitleRegex();
 }
