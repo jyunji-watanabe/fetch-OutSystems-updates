@@ -13,11 +13,11 @@ This repository now includes a .NET solution with:
 ### Run
 
 ```bash
-dotnet run --project /home/runner/work/fetch-OutSystems-updates/fetch-OutSystems-updates/src/FetchOutSystemsUpdates.Cli -- https://example.com
+dotnet run --project src/FetchOutSystemsUpdates.Cli -- https://example.com
 ```
 
 ### Test
 
 ```bash
-dotnet test /home/runner/work/fetch-OutSystems-updates/fetch-OutSystems-updates/FetchOutSystemsUpdates.slnx
+dotnet test FetchOutSystemsUpdates.slnx
 ```

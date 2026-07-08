@@ -4,7 +4,7 @@ using FetchOutSystemsUpdates.Cli;
 
 namespace FetchOutSystemsUpdates.Cli.Tests;
 
-public class UnitTest1
+public class TitleCommandTests
 {
     [Fact]
     public async Task RunAsync_UsesDefaultUrl_WhenNoArgumentsAreProvided()
